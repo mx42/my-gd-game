@@ -21,14 +21,14 @@ func _process(delta: float) -> void:
 	var direction = Input.get_vector("left", "right", "up", "down");
 	velocity = (last_direction + direction) * speed;
 	last_direction = (last_direction + direction) / last_direction_coef;
-	if last_direction.x < -max_last_direction:
-		last_direction.x = -max_last_direction;
-	if last_direction.y < -max_last_direction:
-		last_direction.y = -max_last_direction;
-	if last_direction.x > max_last_direction:
-		last_direction.x = max_last_direction;
-	if last_direction.y > max_last_direction:
-		last_direction.y = max_last_direction;
+	#if last_direction.x < -max_last_direction:
+		#last_direction.x = -max_last_direction;
+	#if last_direction.y < -max_last_direction:
+		#last_direction.y = -max_last_direction;
+	#if last_direction.x > max_last_direction:
+		#last_direction.x = max_last_direction;
+	#if last_direction.y > max_last_direction:
+		#last_direction.y = max_last_direction;
 	if cooldown > 0:
 		cooldown -= delta;
 	move_and_slide();
