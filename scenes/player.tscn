@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://2kccnun8mkjv"]
+
+[ext_resource type="Texture2D" uid="uid://p8npigebbm88" path="res://assets/gfx/ship.png" id="1_6r50y"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_spn58"]
+[ext_resource type="AudioStream" uid="uid://bio5bv0mi006i" path="res://assets/sfx/shoot2.wav" id="3_650e3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gc25u"]
+lifetime_randomness = 0.29
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.5
+angular_velocity_min = 112.09
+angular_velocity_max = 198.32
+gravity = Vector3(0, 98, 0)
+color = Color(1, 0.556863, 0.145098, 1)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_spn58")
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_6r50y")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.445736, -0.727245)
+polygon = PackedVector2Array(-13.5543, 8.72725, 0.445736, -11.2728, 14.4457, 8.72725)
+
+[node name="LaserStart" type="Marker2D" parent="."]
+position = Vector2(0, -21)
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_650e3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_gc25u")

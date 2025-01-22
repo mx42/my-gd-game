@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=3 uid="uid://byrjn2ta5gsld"]
+
+[ext_resource type="PackedScene" uid="uid://2kccnun8mkjv" path="res://scenes/player.tscn" id="1_35q1n"]
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_bh63m"]
+[ext_resource type="Texture2D" uid="uid://bqssrdxkdgjiv" path="res://assets/gfx/bg.png" id="2_ek6d0"]
+[ext_resource type="Texture2D" uid="uid://dski3gvj6msun" path="res://assets/gfx/star1.png" id="3_4miyn"]
+[ext_resource type="Texture2D" uid="uid://duavnpv4rkkgx" path="res://assets/gfx/star2.png" id="4_blnv3"]
+[ext_resource type="Texture2D" uid="uid://cn2kdlnfxrhah" path="res://assets/gfx/star3.png" id="5_fkc8v"]
+[ext_resource type="Texture2D" uid="uid://51s6an87yc1f" path="res://assets/gfx/star4.png" id="6_7ucuq"]
+[ext_resource type="Texture2D" uid="uid://62bvbadc4yhc" path="res://assets/gfx/star5.png" id="7_vyiqk"]
+[ext_resource type="Texture2D" uid="uid://c53y4qb5nh44q" path="res://assets/gfx/star6.png" id="8_dy6n5"]
+[ext_resource type="PackedScene" uid="uid://drg5covf2vhj8" path="res://scenes/ui.tscn" id="10_ac25c"]
+[ext_resource type="AudioStream" uid="uid://cwsqbuoipmtad" path="res://assets/sfx/hurt2.wav" id="11_vh4gx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v16wl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4miyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_blnv3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fkc8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7ucuq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vyiqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dy6n5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc5e8"]
+size = Vector2(60, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7dyo"]
+size = Vector2(1280, 10)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_bh63m")
+
+[node name="BG" type="Sprite2D" parent="."]
+scale = Vector2(5, 10)
+texture = ExtResource("2_ek6d0")
+offset = Vector2(300, 200)
+metadata/_edit_lock_ = true
+
+[node name="Stars" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="base" type="AnimatedSprite2D" parent="Stars"]
+position = Vector2(146, 96)
+sprite_frames = SubResource("SpriteFrames_v16wl")
+autoplay = "default"
+frame_progress = 0.705026
+
+[node name="Player" parent="." groups=["ui"] instance=ExtResource("1_35q1n")]
+z_index = 999
+position = Vector2(642, 602)
+
+[node name="Borders" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Right" type="StaticBody2D" parent="Borders"]
+position = Vector2(1300, 360)
+collision_layer = 4
+metadata/_edit_lock_ = true
+
+[node name="Coll" type="CollisionShape2D" parent="Borders/Right"]
+shape = SubResource("RectangleShape2D_dc5e8")
+metadata/_edit_lock_ = true
+
+[node name="Top" type="StaticBody2D" parent="Borders"]
+position = Vector2(640, 0)
+collision_layer = 4
+metadata/_edit_lock_ = true
+
+[node name="Coll" type="CollisionShape2D" parent="Borders/Top"]
+shape = SubResource("RectangleShape2D_u7dyo")
+metadata/_edit_lock_ = true
+
+[node name="Bot" type="StaticBody2D" parent="Borders"]
+position = Vector2(640, 720)
+collision_layer = 4
+metadata/_edit_lock_ = true
+
+[node name="Coll" type="CollisionShape2D" parent="Borders/Bot"]
+shape = SubResource("RectangleShape2D_u7dyo")
+metadata/_edit_lock_ = true
+
+[node name="Left" type="StaticBody2D" parent="Borders"]
+position = Vector2(-30, 360)
+collision_layer = 4
+metadata/_edit_lock_ = true
+
+[node name="Coll" type="CollisionShape2D" parent="Borders/Left"]
+shape = SubResource("RectangleShape2D_dc5e8")
+metadata/_edit_lock_ = true
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Lasers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="UI" parent="." groups=["ui"] instance=ExtResource("10_ac25c")]
+
+[node name="ShipHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_vh4gx")
+
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
