@@ -37,6 +37,10 @@ func _ready() -> void:
 		star.scale = Vector2(s, s);
 	get_tree().call_group("ui", "set_health", health);
 
+func _process(_delta: float) -> void:
+	if health <= 0:
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn");
+
 func _on_meteor_timer_timeout() -> void:
 	$MeteorTimer.wait_time = Global.meteor_base_timer;
 	var meteor = meteor_scene.instantiate();
@@ -46,10 +50,7 @@ func _on_meteor_timer_timeout() -> void:
 func _on_meteor_collision() -> void:
 	health -= 1;
 	get_tree().call_group("ui", "set_health", health);
-	if health <= 0:
-		get_tree().change_scene_to_file("res://scenes/game_over.tscn");
-	else:
-		$ShipHit.play();
+	$ShipHit.play();
 
 func _on_player_laser(pos: Vector2) -> void:
 	var laser = laser_scene.instantiate();
