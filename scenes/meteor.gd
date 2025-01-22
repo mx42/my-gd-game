@@ -29,6 +29,7 @@ func _process(delta) -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	if can_collide:
 		collision.emit();
+		queue_free();
 
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free();

@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var cooldown := 0.0;
 var last_direction := Vector2(0., 0.);
-@export var last_direction_coef := 1.2;
+@export var last_direction_coef := 2;
 @export var max_last_direction := -1.5;
 
 signal laser(pos: Vector2);

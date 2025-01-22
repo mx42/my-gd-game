@@ -28,7 +28,6 @@ func _ready() -> void:
 	for _n in range(4, 15):
 		var star = $Stars/base.duplicate();
 		$Stars.add_child(star);
-		star.autoplay = "true";
 		star.global_position = Vector2(
 			rng.randi_range(0, window_size[0]),
 			rng.randi_range(0, window_size[1]),

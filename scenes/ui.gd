@@ -34,7 +34,7 @@ func _on_score_timer_timeout() -> void:
 		else:
 			Global.meteor_base_timer -= 0.05;
 	Global.score += 1;
-	if Global.score / 50 > Global.ship_level:
+	if int(Global.score / 50.0) > Global.ship_level:
 		Global.ship_level += 1;
 		if Global.ship_level % 2 == 0:
 			Global.player_base_speed += 50;
