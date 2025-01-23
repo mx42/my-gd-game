@@ -17,6 +17,9 @@ polygon = PackedVector2Array(-11, 10, -11, 1, -9, -5, -2, -10, 6, -11, 11, -7, 1
 
 [node name="DestroyMeteor" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rgtxm")
+volume_db = -4.657
+pitch_scale = 1.2
+max_polyphony = 2
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

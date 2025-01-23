@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://byrjn2ta5gsld"]
+[gd_scene load_steps=16 format=3 uid="uid://byrjn2ta5gsld"]
 
 [ext_resource type="PackedScene" uid="uid://2kccnun8mkjv" path="res://scenes/player.tscn" id="1_35q1n"]
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_bh63m"]
@@ -10,7 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://62bvbadc4yhc" path="res://assets/gfx/star5.png" id="7_vyiqk"]
 [ext_resource type="Texture2D" uid="uid://c53y4qb5nh44q" path="res://assets/gfx/star6.png" id="8_dy6n5"]
 [ext_resource type="PackedScene" uid="uid://drg5covf2vhj8" path="res://scenes/ui.tscn" id="10_ac25c"]
-[ext_resource type="AudioStream" uid="uid://cwsqbuoipmtad" path="res://assets/sfx/hurt2.wav" id="11_vh4gx"]
+[ext_resource type="AudioStream" uid="uid://dti8u25dovwo6" path="res://assets/sfx/hurt3.wav" id="11_7td5s"]
+[ext_resource type="AudioStream" uid="uid://ckbggocxpplkq" path="res://assets/bgm/VSO.mp3" id="12_p2d51"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v16wl"]
 animations = [{
@@ -118,7 +119,14 @@ metadata/_edit_lock_ = true
 [node name="UI" parent="." groups=["ui"] instance=ExtResource("10_ac25c")]
 
 [node name="ShipHit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_vh4gx")
+stream = ExtResource("11_7td5s")
+volume_db = -1.507
+pitch_scale = 1.17
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_p2d51")
+volume_db = -2.01
+autoplay = true
 
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]

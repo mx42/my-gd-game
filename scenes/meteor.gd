@@ -37,5 +37,5 @@ func _on_area_entered(area: Area2D) -> void:
 	Global.score += 10;
 	$MeteorImage.hide();
 	can_collide = false;
-	#await get_tree().create_timer(0.5).timeout;
+	await get_tree().create_timer(0.5).timeout;
 	call_deferred("queue_free");

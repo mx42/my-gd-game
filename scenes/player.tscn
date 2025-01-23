@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://p8npigebbm88" path="res://assets/gfx/ship.png" id="1_6r50y"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_spn58"]
-[ext_resource type="AudioStream" uid="uid://bio5bv0mi006i" path="res://assets/sfx/shoot2.wav" id="3_650e3"]
+[ext_resource type="AudioStream" uid="uid://c03kghmku12vn" path="res://assets/sfx/shoot3.wav" id="3_21m3o"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gc25u"]
 lifetime_randomness = 0.29
@@ -29,7 +29,9 @@ polygon = PackedVector2Array(-13.5543, 8.72725, 0.445736, -11.2728, 14.4457, 8.7
 position = Vector2(0, -21)
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_650e3")
+stream = ExtResource("3_21m3o")
+volume_db = -9.831
+pitch_scale = 1.24
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_gc25u")
